@@ -1,0 +1,23 @@
+{
+  "name": "native-timeout-example",
+  "private": true,
+  "version": "0.0.1",
+  "scripts": {
+    "start": "react-native start",
+    "ios": "react-native run-ios",
+    "android": "react-native run-android"
+  },
+  "dependencies": {
+    "react": "18.2.0",
+    "react-native": "0.72.4",
+    "react-native-native-timeout": "file:.."
+  },
+  "devDependencies": {
+    "@babel/core": "^7.22.9",
+    "@babel/runtime": "^7.22.6",
+    "@react-native-community/cli": "^11.3.6",
+    "@react-native-community/cli-platform-android": "^11.3.6",
+    "@react-native-community/cli-platform-ios": "^11.3.6",
+    "typescript": "^5.1.6"
+  }
+}
