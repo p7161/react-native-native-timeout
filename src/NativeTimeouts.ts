@@ -4,12 +4,14 @@ type NativeTimeoutsModule = {
   setTimeout(delayMs: number, id: string): void;
   clearTimeout(id: string): void;
   clearAll?: () => void;
+  addListener(eventName: string): void;
+  removeListeners(count: number): void;
 };
 
-const NativeTimeouts: NativeTimeoutsModule | undefined =
-  NativeModules.NativeTimeouts;
+const NativeTimeoutsModuleInstance =
+  NativeModules.NativeTimeouts as NativeTimeoutsModule | undefined;
 
-if (!NativeTimeouts) {
+if (!NativeTimeoutsModuleInstance) {
   throw new Error(
     Platform.select({
       ios: 'Native module "NativeTimeouts" is not linked. Did you run pod install?',
@@ -20,13 +22,15 @@ if (!NativeTimeouts) {
   );
 }
 
+const NativeTimeouts: NativeTimeoutsModule = NativeTimeoutsModuleInstance;
+
 type NativeTimeoutEvent = {
   id: string;
 };
 
 export type TimeoutId = string;
 
-const emitter = new NativeEventEmitter(NativeTimeouts as unknown as object);
+const emitter = new NativeEventEmitter(NativeTimeouts);
 const callbacks = new Map<TimeoutId, () => void>();
 
 const handleTimeout = ({ id }: NativeTimeoutEvent) => {
