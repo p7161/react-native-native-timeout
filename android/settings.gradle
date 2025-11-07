@@ -1,0 +1,3 @@
+rootProject.name = 'react-native-native-timeout'
+include ':react-native-native-timeout'
+project(':react-native-native-timeout').projectDir = new File(rootProject.projectDir, '.')
