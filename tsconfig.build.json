@@ -1,0 +1,13 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "lib/commonjs",
+    "declaration": true,
+    "declarationDir": "lib/typescript",
+    "declarationMap": true,
+    "module": "commonjs",
+    "target": "es2019"
+  },
+  "include": ["src"]
+}

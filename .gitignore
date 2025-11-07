@@ -1,0 +1,11 @@
+node_modules/
+lib/
+package-lock.json
+npm-debug.log*
+yarn-error.log*
+example/node_modules/
+example/package-lock.json
+example/android/.gradle/
+example/android/app/build/
+example/ios/Pods/
+.DS_Store
