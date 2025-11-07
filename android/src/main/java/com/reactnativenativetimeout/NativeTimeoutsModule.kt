@@ -26,22 +26,26 @@ class NativeTimeoutsModule(reactContext: ReactApplicationContext) :
   }
 
   @ReactMethod
-  fun setTimeout(delayMs: Double, id: String) {
-    clearTimeout(id)
+  fun setTimeout(delayMs: Double, id: String?) {
+    val timeoutId = id ?: return
+
+    clearTimeout(timeoutId)
 
     val runnable = Runnable {
-      tasks.remove(id)
-      sendTimeoutFired(id)
+      tasks.remove(timeoutId)
+      sendTimeoutFired(timeoutId)
     }
 
-    tasks[id] = runnable
+    tasks[timeoutId] = runnable
     val safeDelay = if (delayMs.isNaN()) 0L else max(0L, delayMs.toLong())
     handler.postDelayed(runnable, safeDelay)
   }
 
   @ReactMethod
-  fun clearTimeout(id: String) {
-    tasks.remove(id)?.let { runnable ->
+  fun clearTimeout(id: String?) {
+    val timeoutId = id ?: return
+
+    tasks.remove(timeoutId)?.let { runnable ->
       handler.removeCallbacks(runnable)
     }
   }
